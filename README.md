@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="./logo.png" alt="ARIA Attribute MCP Server ロゴ" width="200" height="200">
+  <img src="./logo.png" alt="ARIA Validate MCP Server ロゴ" width="200" height="200">
 </p>
 
-<h1 align="center">ARIA Attribute MCP Server</h1>
+<h1 align="center">ARIA Validate MCP Server</h1>
 
 ARIA（Accessible Rich Internet Applications）属性とrole属性の検証を行うModel
 Context Protocol (MCP) サーバーです。
