@@ -19,6 +19,7 @@ ARIA（Accessible Rich Internet Applications）の検証を行うModel Context P
 
 ### 必要な環境
 
+- [Node.js](https://nodejs.org/) 24.x以上
 - [Deno](https://deno.land/) 2.x以上
 
 ### MCPクライアントでの設定
@@ -43,9 +44,18 @@ Claude DesktopなどのMCPクライアントの設定ファイルに以下を追
 ## 開発
 
 ```bash
-# 開発モードで実行（ファイル監視あり）
+## 開発モードで実行（ファイル監視あり）
 deno task dev
+## テスト
+deno test
+## フォーマット
+deno fmt
+## Linter
+deno lint
 ```
+
+## 謝辞
+このOSSはGemini 2.5 Flash Image (Nano Banana)によってロゴを製作、Claude 4.5 Sonnetによってドキュメントのサンプルを提案いただきました。感謝申し上げます。
 
 ## ライセンス
 
