@@ -11,6 +11,7 @@
   },
   "imports": {
     "@modelcontextprotocol/sdk": "npm:@modelcontextprotocol/sdk@^1.19.1",
+    "@std/assert": "jsr:@std/assert@^1.0.15",
     "aria-query": "npm:aria-query@5.3.2",
     "zod": "npm:zod@3.25.76"
   }
