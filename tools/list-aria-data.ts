@@ -9,7 +9,7 @@ export const LIST_AREA_ROLES_DATA_TOOL_DESCRIPTION =
 export const ListAriaDataInputSchema = z.object({
   type: z.enum(["roles", "attributes", "both"]).describe(
     "Type of ARIA data to list",
-  )
+  ),
 });
 
 export type ListAriaDataInput = z.infer<typeof ListAriaDataInputSchema>;

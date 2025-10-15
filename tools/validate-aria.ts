@@ -8,7 +8,7 @@ export const validateAriaInputSchema = z.object({
   ),
   value: z.string().optional().describe(
     "The value to validate for the attribute",
-  )
+  ),
 });
 
 type ValidateAriaInput = z.infer<typeof validateAriaInputSchema>;

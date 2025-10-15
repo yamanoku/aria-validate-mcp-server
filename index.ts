@@ -4,9 +4,18 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import process from "node:process";
 
-import { validateRole, ValidateRoleInputSchema } from "./tools/validate-role.ts";
-import { validateAriaAttribute, validateAriaInputSchema } from "./tools/validate-aria.ts";
-import { listAriaData, ListAriaDataInputSchema } from "./tools/list-aria-data.ts";
+import {
+  validateRole,
+  ValidateRoleInputSchema,
+} from "./tools/validate-role.ts";
+import {
+  validateAriaAttribute,
+  validateAriaInputSchema,
+} from "./tools/validate-aria.ts";
+import {
+  listAriaData,
+  ListAriaDataInputSchema,
+} from "./tools/list-aria-data.ts";
 
 // MCPサーバーの初期化
 const server = new McpServer({
@@ -22,7 +31,8 @@ server.tool(
   "validate_role_attribute",
   {
     title: "Role属性のバリデーション",
-    description: "指定されたARIAロールが有効かどうかを検証し、そのプロパティ、必須属性、サポートされている属性を返します",
+    description:
+      "指定されたARIAロールが有効かどうかを検証し、そのプロパティ、必須属性、サポートされている属性を返します",
     inputSchema: ValidateRoleInputSchema,
     readOnlyHint: true,
   },
@@ -39,7 +49,8 @@ server.tool(
   "validate_aria_attribute",
   {
     title: "ARIA属性の検証",
-    description: "ARIA属性が存在するか確認し、指定されたロールとの互換性をチェックし、属性値を検証します",
+    description:
+      "ARIA属性が存在するか確認し、指定されたロールとの互換性をチェックし、属性値を検証します",
     inputSchema: validateAriaInputSchema,
     readOnlyHint: true,
   },
@@ -56,7 +67,8 @@ server.tool(
   "list_arias_roles_data",
   {
     title: "ARIA・Role属性のリスト一覧",
-    description: "aria-queryから利用可能なすべてのARIAロールおよび属性をリスト表示します。フィルタリングも可能です",
+    description:
+      "aria-queryから利用可能なすべてのARIAロールおよび属性をリスト表示します。フィルタリングも可能です",
     inputSchema: ListAriaDataInputSchema,
     readOnlyHint: true,
   },
