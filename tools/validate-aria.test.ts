@@ -12,6 +12,7 @@ Deno.test("validateAriaAttribute - 値なしで既存のARIA属性を検証で�
 });
 
 Deno.test("validateAriaAttribute - 存在しないARIA属性を拒否する", () => {
+  // @ts-ignore: Test for invalid attribute
   const result = validateAriaAttribute({ attribute: "aria-invalid-attr" });
 
   assertEquals(result.isValid, false);

@@ -1,13 +1,13 @@
 import { aria, roles } from "aria-query";
 import { z } from "zod";
 
-export const ListAriaDataInputSchema = z.object({
+export const ListAriaDataInputSchema = {
   type: z.enum(["roles", "attributes", "both"]).describe(
     "Type of ARIA data to list",
   ),
-});
+};
 
-export type ListAriaDataInput = z.infer<typeof ListAriaDataInputSchema>;
+const ListAriaDataInputSchemaObject = z.object(ListAriaDataInputSchema);
 
 interface AriaAttributeInfo {
   name: string;
@@ -36,7 +36,9 @@ interface ListAriaDataResult {
   totalAttributes?: number;
 }
 
-export function listAriaData(input: ListAriaDataInput): ListAriaDataResult {
+export function listAriaData(
+  input: z.infer<typeof ListAriaDataInputSchemaObject>,
+): ListAriaDataResult {
   const { type } = input;
   const result: ListAriaDataResult = {};
 

@@ -1,11 +1,16 @@
 import { type ARIARoleDefinitionKey, roles } from "aria-query";
 import { z } from "zod";
 
-export const ValidateRoleInputSchema = z.object({
-  role: z.string().describe("The ARIA role to validate"),
-});
-
-export type ValidateRoleInput = z.infer<typeof ValidateRoleInputSchema>;
+const availableRoles = Array.from(roles.keys()) as ARIARoleDefinitionKey[];
+export const ValidateRoleInputSchema = {
+  role: z.enum(
+    availableRoles as [ARIARoleDefinitionKey, ...ARIARoleDefinitionKey[]],
+  )
+    .describe(
+      "The ARIA role to validate - must be one of the valid ARIA roles",
+    ),
+};
+const ValidateRoleInputSchemaObject = z.object(ValidateRoleInputSchema);
 
 interface ValidateRoleResult {
   isValid: boolean;
@@ -16,10 +21,12 @@ interface ValidateRoleResult {
   error?: string;
 }
 
-export function validateRole(input: ValidateRoleInput): ValidateRoleResult {
+export function validateRole(
+  input: z.infer<typeof ValidateRoleInputSchemaObject>,
+): ValidateRoleResult {
   const { role } = input;
 
-  const roleData = roles.get(role as ARIARoleDefinitionKey);
+  const roleData = roles.get(role);
 
   if (!roleData) {
     return {

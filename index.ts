@@ -29,13 +29,8 @@ const server = new McpServer({
 // Tools
 server.tool(
   "validate_role_attribute",
-  {
-    title: "Role属性のバリデーション",
-    description:
-      "指定されたARIAロールが有効かどうかを検証し、そのプロパティ、必須属性、サポートされている属性を返します",
-    inputSchema: ValidateRoleInputSchema,
-    readOnlyHint: true,
-  },
+  "指定されたARIAロールが有効かどうかを検証し、そのプロパティ、必須属性、サポートされている属性を返します",
+  ValidateRoleInputSchema,
   async ({ role }) => {
     const result = await validateRole({ role });
     return {
@@ -47,13 +42,8 @@ server.tool(
 
 server.tool(
   "validate_aria_attribute",
-  {
-    title: "ARIA属性の検証",
-    description:
-      "ARIA属性が存在するか確認し、指定されたロールとの互換性をチェックし、属性値を検証します",
-    inputSchema: validateAriaInputSchema,
-    readOnlyHint: true,
-  },
+  "ARIA属性が存在するか確認し、指定されたロールとの互換性をチェックし、属性値を検証します",
+  validateAriaInputSchema,
   async ({ attribute, value }) => {
     const result = await validateAriaAttribute({ attribute, value });
     return {
@@ -65,13 +55,8 @@ server.tool(
 
 server.tool(
   "list_arias_roles_data",
-  {
-    title: "ARIA・Role属性のリスト一覧",
-    description:
-      "aria-queryから利用可能なすべてのARIAロールおよび属性をリスト表示します。フィルタリングも可能です",
-    inputSchema: ListAriaDataInputSchema,
-    readOnlyHint: true,
-  },
+  "aria-queryから利用可能なすべてのARIAロールおよび属性をリスト表示します。",
+  ListAriaDataInputSchema,
   async ({ type }) => {
     const result = await listAriaData({ type });
     return {

@@ -1,5 +1,6 @@
 import { assertEquals, assertExists } from "@std/assert";
 import { validateRole } from "./validate-role.ts";
+import type { ARIARoleDefinitionKey } from "aria-query";
 
 Deno.test("validateRole - 既存のARIAロールを検証できる", () => {
   const result = validateRole({ role: "button" });
@@ -13,7 +14,9 @@ Deno.test("validateRole - 既存のARIAロールを検証できる", () => {
 });
 
 Deno.test("validateRole - 存在しないARIAロールを拒否する", () => {
-  const result = validateRole({ role: "invalid-role" });
+  const result = validateRole({
+    role: "invalid-role" as ARIARoleDefinitionKey,
+  });
 
   assertEquals(result.isValid, false);
   assertExists(result.error);
@@ -66,7 +69,7 @@ Deno.test("validateRole - 様々な一般的なロールを検証できる", () 
     "search",
     "article",
     "region",
-  ];
+  ] as ARIARoleDefinitionKey[];
 
   for (const role of commonRoles) {
     const result = validateRole({ role });
@@ -135,7 +138,7 @@ Deno.test("validateRole - 抽象ロールを検証できる", () => {
     "structure",
     "widget",
     "window",
-  ];
+  ] as ARIARoleDefinitionKey[];
 
   for (const role of abstractRoles) {
     const result = validateRole({ role });
@@ -152,6 +155,7 @@ Deno.test("validateRole - 抽象ロールを検証できる", () => {
 Deno.test("validateRole - 大文字小文字を区別するロール名を処理できる", () => {
   // ARIA roles are case-sensitive and should be lowercase
   const resultLower = validateRole({ role: "button" });
+  // @ts-ignore: Test for invalid role
   const resultUpper = validateRole({ role: "BUTTON" });
 
   assertEquals(resultLower.isValid, true);
@@ -186,6 +190,7 @@ Deno.test("validateRole - 同じロールに対して一貫した結果を返す
 });
 
 Deno.test("validateRole - 空文字列のロールを処理できる", () => {
+  // @ts-ignore: Test for invalid role
   const result = validateRole({ role: "" });
 
   assertEquals(result.isValid, false);
@@ -193,6 +198,7 @@ Deno.test("validateRole - 空文字列のロールを処理できる", () => {
 });
 
 Deno.test("validateRole - ロール名の空白文字を処理できる", () => {
+  // @ts-ignore: Test for invalid role
   const result = validateRole({ role: " button " });
 
   // Whitespace should not be trimmed automatically

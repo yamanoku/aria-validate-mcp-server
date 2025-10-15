@@ -5,16 +5,18 @@ import {
 } from "aria-query";
 import { z } from "zod";
 
-export const validateAriaInputSchema = z.object({
-  attribute: z.string().describe(
-    "The ARIA attribute to validate (e.g., 'aria-label')",
-  ),
+const availableProperties = Array.from(aria.keys()) as ARIAProperty[];
+
+export const validateAriaInputSchema = {
+  attribute: z.enum(availableProperties as [ARIAProperty, ...ARIAProperty[]])
+    .describe(
+      "The ARIA attribute to validate - must be one of the valid ARIA properties",
+    ),
   value: z.string().optional().describe(
     "The value to validate for the attribute",
   ),
-});
-
-type ValidateAriaInput = z.infer<typeof validateAriaInputSchema>;
+};
+const validateAriaInputSchemaObject = z.object(validateAriaInputSchema);
 
 interface ValidateAriaResult {
   isValid: boolean;
@@ -27,12 +29,12 @@ interface ValidateAriaResult {
 }
 
 export function validateAriaAttribute(
-  input: ValidateAriaInput,
+  input: z.infer<typeof validateAriaInputSchemaObject>,
 ): ValidateAriaResult {
   const { attribute, value } = input;
 
-  // Check if attribute exists in aria-query
-  const ariaData = aria.get(attribute as ARIAProperty);
+  // 型安全性により、attributeは既に有効なARIAPropertyであることが保証されている
+  const ariaData = aria.get(attribute);
 
   if (!ariaData) {
     return {
