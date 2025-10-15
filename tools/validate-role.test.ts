@@ -140,7 +140,11 @@ Deno.test("validateRole - 抽象ロールを検証できる", () => {
   for (const role of abstractRoles) {
     const result = validateRole({ role });
 
-    assertEquals(result.isValid, true, `Abstract role "${role}" should be valid`);
+    assertEquals(
+      result.isValid,
+      true,
+      `Abstract role "${role}" should be valid`,
+    );
     assertEquals(result.isAbstract, true, `Role "${role}" should be abstract`);
   }
 });
