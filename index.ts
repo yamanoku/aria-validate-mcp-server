@@ -17,10 +17,12 @@ import {
   ListAriaDataInputSchema,
 } from "./tools/list-aria-data.ts";
 
+import DenoJSON from "./deno.json" with { type: "json" };
+
 // MCPサーバーの初期化
 const server = new McpServer({
   name: "ARIA Validate MCP Server",
-  version: "0.0.1",
+  version: DenoJSON.version,
   capabilities: {
     tools: {},
   },
