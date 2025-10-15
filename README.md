@@ -4,12 +4,12 @@
 
 <h1 align="center">ARIA Validate MCP Server</h1>
 
-ARIA（Accessible Rich Internet Applications）属性とrole属性の検証を行うModel
-Context Protocol (MCP) サーバーです。
+ARIA（Accessible Rich Internet Applications）の検証を行うModel Context Protocol
+(MCP) サーバーです。
 
 [aria-query](https://github.com/A11yance/aria-query)ライブラリを使用して、ARIA属性とrole属性の妥当性を検証します。
 
-このMCPサーバーを使用すると、ARIA属性とrole属性に関する質問をすることができます。
+このMCPサーバーを使用すると、以下のような質問ができます。
 
 - aria-labelledby属性はnavigation roleで使用できますか？
 - aria-hiddenの有効な値は何ですか？
