@@ -33,7 +33,7 @@ Claude DesktopなどのMCPクライアントの設定ファイルに以下を追
       "args": [
         "run",
         "--allow-read",
-        "/path/to/aria-validate-mcp-server/aria-validate-mcp-server.ts"
+        "/path/to/aria-validate-mcp-server/index.ts"
       ]
     }
   }
