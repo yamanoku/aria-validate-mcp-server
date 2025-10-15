@@ -1,0 +1,44 @@
+{
+  "name": "@yamanoku/aria-validate-mcp-server",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "index.js",
+  "description": "Model context protocol server for validating ARIA (Accessible Rich Internet Applications)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yamanoku/aria-validate-mcp-server.git"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "start": "node dist/index.js"
+  },
+  "bin": {
+    "@yamanoku/aria-validate-mcp-server": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "wai-aria",
+    "aria",
+    "accessibility",
+    "mcp",
+    "model-context-protocol"
+  ],
+  "author": "yamanoku",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yamanoku/aria-validate-mcp-server/issues"
+  },
+  "homepage": "https://github.com/yamanoku/aria-validate-mcp-server#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.20.0",
+    "aria-query": "5.3.2",
+    "tsdown": "0.15.7",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/aria-query": "5.0.4",
+    "@types/node": "24.7.2"
+  }
+}
