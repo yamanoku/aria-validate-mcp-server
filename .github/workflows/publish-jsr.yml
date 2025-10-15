@@ -1,0 +1,25 @@
+name: Publish npm Package
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  id-token: write # The OIDC ID token is used for authentication with JSR.
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [24.x]
+    steps:
+      - uses: actions/checkout@v5.0.0 # v5.0.0
+
+      - uses: actions/setup-node@v6.0.0 # v6.0.0
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: "https://registry.npmjs.org"
+      - run: npx jsr publish
