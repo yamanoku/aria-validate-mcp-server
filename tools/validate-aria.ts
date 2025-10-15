@@ -1,5 +1,8 @@
-import { aria } from "aria-query";
-import type { ARIAPropertyDefinition } from "aria-query";
+import {
+  aria,
+  type ARIAProperty,
+  type ARIAPropertyDefinition,
+} from "aria-query";
 import { z } from "zod";
 
 export const validateAriaInputSchema = z.object({
@@ -17,7 +20,7 @@ interface ValidateAriaResult {
   isValid: boolean;
   attribute?: string;
   type?: string;
-  values?: string[];
+  values?: (string | boolean)[];
   isAllowUndefined?: boolean;
   valueValid?: boolean;
   error?: string;
@@ -29,7 +32,7 @@ export function validateAriaAttribute(
   const { attribute, value } = input;
 
   // Check if attribute exists in aria-query
-  const ariaData = aria.get(attribute);
+  const ariaData = aria.get(attribute as ARIAProperty);
 
   if (!ariaData) {
     return {

@@ -1,4 +1,4 @@
-import { roles } from "aria-query";
+import { type ARIARoleDefinitionKey, roles } from "aria-query";
 import { z } from "zod";
 
 export const ValidateRoleInputSchema = z.object({
@@ -13,14 +13,13 @@ interface ValidateRoleResult {
   isAbstract?: boolean;
   requiredProps?: string[];
   supportedProps?: string[];
-  accessibleNameRequired?: boolean;
   error?: string;
 }
 
 export function validateRole(input: ValidateRoleInput): ValidateRoleResult {
   const { role } = input;
 
-  const roleData = roles.get(role);
+  const roleData = roles.get(role as ARIARoleDefinitionKey);
 
   if (!roleData) {
     return {
@@ -29,10 +28,9 @@ export function validateRole(input: ValidateRoleInput): ValidateRoleResult {
     };
   }
 
-  const requiredProps = Array.from(roleData.requiredProps || []) as string[];
-  const supportedProps = Array.from(roleData.props || []) as string[];
+  const requiredProps = Object.keys(roleData.requiredProps);
+  const supportedProps = Object.keys(roleData.props);
   const isAbstract = roleData.abstract || false;
-  const accessibleNameRequired = roleData.accessibleNameRequired || false;
 
   return {
     isValid: true,
@@ -40,6 +38,5 @@ export function validateRole(input: ValidateRoleInput): ValidateRoleResult {
     isAbstract,
     requiredProps,
     supportedProps,
-    accessibleNameRequired,
   };
 }

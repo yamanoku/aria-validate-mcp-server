@@ -1,11 +1,6 @@
 import { aria, roles } from "aria-query";
 import { z } from "zod";
 
-export const LIST_AREA_ROLES_DATA_TOOL_NAME = "list_arias_roles_data";
-export const LIST_AREA_ROLES_DATA_TOOL_TITLE = "ARIA・Role属性のリスト一覧";
-export const LIST_AREA_ROLES_DATA_TOOL_DESCRIPTION =
-  "aria-queryから利用可能なすべてのARIAロールおよび属性をリスト表示します。フィルタリングも可能です";
-
 export const ListAriaDataInputSchema = z.object({
   type: z.enum(["roles", "attributes", "both"]).describe(
     "Type of ARIA data to list",
@@ -17,13 +12,12 @@ export type ListAriaDataInput = z.infer<typeof ListAriaDataInputSchema>;
 interface AriaAttributeInfo {
   name: string;
   type: string;
-  values?: string[];
-  allowUndefined?: boolean;
+  values?: (string | boolean)[];
+  isAllowUndefined?: boolean;
 }
 
 interface AriaRoleInfo {
   name: string;
-  description: string;
   requiredProps: string[];
   supportedProps: string[];
   isAbstract?: boolean;
@@ -53,9 +47,8 @@ export function listAriaData(input: ListAriaDataInput): ListAriaDataResult {
     for (const [roleName, roleData] of roles.entries()) {
       rolesList.push({
         name: roleName,
-        description: roleData.name || "No description",
-        requiredProps: Array.from(roleData.requiredProps || []),
-        supportedProps: Array.from(roleData.props || []),
+        requiredProps: Object.keys(roleData.requiredProps),
+        supportedProps: Object.keys(roleData.props),
         isAbstract: roleData.abstract,
         relatedConcepts: roleData.relatedConcepts?.slice(0, 3), // Limit to first 3 for brevity
       });
@@ -76,11 +69,11 @@ export function listAriaData(input: ListAriaDataInput): ListAriaDataResult {
       const attrInfo: AriaAttributeInfo = {
         name: attrName,
         type: attrData.type,
-        allowUndefined: attrData.allowUndefined,
+        isAllowUndefined: attrData.allowundefined,
       };
 
       if (attrData.values) {
-        attrInfo.values = Array.from(attrData.values);
+        attrInfo.values = attrData.values;
       }
 
       attributesList.push(attrInfo);
