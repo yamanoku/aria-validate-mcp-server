@@ -1,19 +1,13 @@
-FROM denoland/deno:latest
+FROM node:24.10.0-slim
 
-# Create the application directory
 WORKDIR /app
 
-# Copy dependency files first for caching
-COPY --chown=deno:deno deno.json deno.lock* ./
+COPY package*.json ./
 
-# Copy the rest of the application code
-COPY --chown=deno:deno . .
+RUN npm ci
 
-# Prefer not to run as root.
-USER deno
+COPY . .
 
-# Cache application dependencies
-RUN deno cache index.ts
+RUN npm run build
 
-# Run the application
-CMD ["run", "--allow-read", "index.ts"]
+ENTRYPOINT ["node", "dist/index.js"]
