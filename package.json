@@ -1,6 +1,6 @@
 {
   "name": "@yamanoku/aria-validate-mcp-server",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "type": "module",
   "main": "index.js",
   "description": "Model context protocol server for validating ARIA (Accessible Rich Internet Applications)",
